@@ -1,4 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿
+// See https://aka.ms/new-console-template for more information
 using BajerBillardConsole;
 
 Console.WriteLine("Hello, World!");
@@ -13,5 +14,10 @@ Player player2 = new Player(Console.ReadLine());
 
 Console.WriteLine($"Spiller 1: {player2.Name}, point: {player1.Points}");
 Console.WriteLine($"Spiller 2: {player2.Name}, point: {player1.Points}");
+
+Console.WriteLine("dette er hele listen:");
+PlayerList playerList = new PlayerList();
+playerList.AddPlayer();
+playerList.ShowList();
 
 Console.ReadKey();
