@@ -16,5 +16,60 @@ namespace BajerBillardConsoleTest01
             Name = name;
             Point = point;
         }
+
+
+        List<Player> players = new List<Player>();
+
+        public void AddPlayers()
+        {
+            bool morePlayers = true;
+            while (morePlayers)
+            {
+                Console.WriteLine("skriv navn på spiller");
+                players.Add(new Player(Console.ReadLine()));
+                Console.WriteLine("Tilføj flere spillere? skriv '1' for ja, '2' for nej.");
+                string userInput = Console.ReadLine();
+                if (userInput == "1")
+                {
+                    morePlayers = true;
+                }
+                else break;
+
+            }                        
+        }
+        public void ShowPlayerList()
+        {
+            Console.WriteLine("Status:");
+            foreach (Player p in players)
+            {
+                Console.WriteLine($"Navn: {p.Name}, Score: {p.Point} point");
+            }
+
+        }
+
+        public void GodeEllerSkaeve()
+        {
+            foreach (Player p in players)
+            {
+                Console.WriteLine($"{p.Name} det er din tur.");
+                Console.WriteLine("skriv '1' for Gode eller '2' for Skæve");
+                string userInput = Console.ReadLine();
+                Console.WriteLine("Skriv hvor mange point du fik");
+                int recievedPoints = Convert.ToInt32(Console.ReadLine());
+                if (userInput == "1")
+                {
+                    p.Point = p.Point - recievedPoints;
+                }
+                if (userInput == "2")
+                {
+
+                }
+                ShowPlayerList();
+                
+
+            }
+        }
+
+
     }
 }

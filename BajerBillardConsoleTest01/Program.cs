@@ -10,35 +10,17 @@ namespace BajerBillardConsoleTest01
     {
         static void Main(string[] args)
         {
-            List<Player> players = new List<Player>();
+            Player player = new Player();
+           
+            player.AddPlayers();
 
-            addPlayers(players);
+            player.ShowPlayerList();
 
-            foreach (Player p in players)
-            {
-                Console.WriteLine($"Navn: {p.Name}, Score: {p.Point} point");
-            }
-
+            player.GodeEllerSkaeve();
 
             Console.ReadKey();
         }
 
-        private static void addPlayers(List<Player> players)
-        {
-            bool morePlayers = true;
-            while (morePlayers)
-            {
-                Console.WriteLine("skriv navn på spiller");
-                players.Add(new Player(Console.ReadLine()));
-                Console.WriteLine("Tilføj flere spillere? skriv '1' for ja, '2' for nej.");
-                string userInput = Console.ReadLine();
-                if (userInput == "1")
-                {
-                    morePlayers = true;
-                }
-                else break;
-
-            }
-        }
+    
     }
 }
