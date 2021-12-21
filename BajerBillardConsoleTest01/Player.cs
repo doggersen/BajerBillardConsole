@@ -51,7 +51,7 @@ namespace BajerBillardConsoleTest01
         {
             //Player p;
 
-            while (Point >= 0)
+            while (Point > 0)
             {
                 foreach (Player p in players)
                 {
@@ -68,7 +68,12 @@ namespace BajerBillardConsoleTest01
                     //Skæve:
                     if (userInput == "2")
                     {
+                        p.Point = p.Point + recievedPoints;
 
+                        foreach (Player p2 in players)
+                        {
+                            p2.Point = p2.Point - recievedPoints;
+                        }
                     }
                     ShowPlayerList();
                 }
