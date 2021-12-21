@@ -10,6 +10,7 @@ namespace BajerBillardConsole
     {
         public List<Player>? Players { get; set;}
 
+
         public void AddPlayer()
         {
             Players.Add(new Player("Jimmy"));
