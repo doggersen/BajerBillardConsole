@@ -49,23 +49,29 @@ namespace BajerBillardConsoleTest01
 
         public void GodeEllerSkaeve()
         {
-            foreach (Player p in players)
-            {
-                Console.WriteLine($"{p.Name} det er din tur.");
-                Console.WriteLine("skriv '1' for Gode eller '2' for Skæve");
-                string userInput = Console.ReadLine();
-                Console.WriteLine("Skriv hvor mange point du fik");
-                int recievedPoints = Convert.ToInt32(Console.ReadLine());
-                if (userInput == "1")
-                {
-                    p.Point = p.Point - recievedPoints;
-                }
-                if (userInput == "2")
-                {
+            //Player p;
 
+            while (Point >= 0)
+            {
+                foreach (Player p in players)
+                {
+                    Console.WriteLine($"{p.Name} det er din tur.");
+                    Console.WriteLine("skriv '1' for Gode eller '2' for Skæve");
+                    string userInput = Console.ReadLine();
+                    Console.WriteLine("Skriv hvor mange point du fik");
+                    int recievedPoints = Convert.ToInt32(Console.ReadLine());
+                    //Gode:
+                    if (userInput == "1")
+                    {
+                        p.Point = p.Point - recievedPoints;
+                    }
+                    //Skæve:
+                    if (userInput == "2")
+                    {
+
+                    }
+                    ShowPlayerList();
                 }
-                ShowPlayerList();
-                
 
             }
         }
