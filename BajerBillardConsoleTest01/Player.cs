@@ -11,10 +11,17 @@ namespace BajerBillardConsoleTest01
         public string Name { get; set; }
         public int Point { get; set; }
 
+        //automatic ID number
+        private static int m_Counter = 0; 
+        public int Id { get; set; }
+
+
         public Player(string name = "Anonymous", int point = 60)
         {
             Name = name;
             Point = point;
+
+            this.Id = System.Threading.Interlocked.Increment(ref m_Counter); //part of the automatic ID number!
         }
 
 
@@ -42,7 +49,7 @@ namespace BajerBillardConsoleTest01
             Console.WriteLine("Status:");
             foreach (Player p in players)
             {
-                Console.WriteLine($"Navn: {p.Name}, Score: {p.Point} point");
+                Console.WriteLine($"Navn: {p.Name}, Score: {p.Point} point, ID: {p.Id}");
             }
 
         }
@@ -53,8 +60,27 @@ namespace BajerBillardConsoleTest01
 
             while (Point > 0)
             {
-                foreach (Player p in players)
+                foreach (Player p in players.ToList()) //If you add ".ToList()" to your list (or the results of a LINQ query), you can remove "item" directly from "list" without the dreaded "Collection was modified; enumeration operation may not execute." error.
                 {
+                    void DuHarVundet()
+                    {
+
+                    }
+
+                    if (p.Point <= 0)
+                    {
+                        Console.WriteLine($"{p.Name} du har vundet! De andre spiller videre uden dig. Knep nogle damer mens du venter.");
+                        //foreach (Player item in players.Select((value, i) => (value, i)))
+                        var player = players.FirstOrDefault(x => x.Name == p.Name);
+
+                        //int index = players.FindIndex(a => a.Name == p.Name);
+                        players.Remove(player);
+
+                        //players.RemoveAll(movie => Name.Contains(p.Name));
+                       // players.RemoveAll(a => a.Name == p.Name);
+
+                    }
+
                     Console.WriteLine($"{p.Name} det er din tur.");
                     Console.WriteLine("skriv '1' for Gode eller '2' for Skæve");
                     string userInput = Console.ReadLine();
@@ -64,6 +90,7 @@ namespace BajerBillardConsoleTest01
                     if (userInput == "1")
                     {
                         p.Point = p.Point - recievedPoints;
+                                                    
                     }
                     //Skæve:
                     if (userInput == "2")
