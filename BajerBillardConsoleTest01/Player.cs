@@ -62,23 +62,22 @@ namespace BajerBillardConsoleTest01
             {
                 foreach (Player p in players.ToList()) //If you add ".ToList()" to your list (or the results of a LINQ query), you can remove "item" directly from "list" without the dreaded "Collection was modified; enumeration operation may not execute." error.
                 {
-                    void DuHarVundet()
-                    {
+                    //void DuHarVundet(string name)
+                    //{
+                    //    Console.WriteLine($"{name} du har vundet! De andre spiller videre uden dig. Knep nogle damer mens du venter.");
 
-                    }
+                    //    var player = players.FirstOrDefault(x => x.Name == name);
 
-                    if (p.Point <= 0)
+                    //    players.Remove(player);
+                    //}
+
+                    void DuHarVundet(string name)
                     {
                         Console.WriteLine($"{p.Name} du har vundet! De andre spiller videre uden dig. Knep nogle damer mens du venter.");
-                        //foreach (Player item in players.Select((value, i) => (value, i)))
+
                         var player = players.FirstOrDefault(x => x.Name == p.Name);
 
-                        //int index = players.FindIndex(a => a.Name == p.Name);
                         players.Remove(player);
-
-                        //players.RemoveAll(movie => Name.Contains(p.Name));
-                       // players.RemoveAll(a => a.Name == p.Name);
-
                     }
 
                     Console.WriteLine($"{p.Name} det er din tur.");
@@ -90,16 +89,17 @@ namespace BajerBillardConsoleTest01
                     if (userInput == "1")
                     {
                         p.Point = p.Point - recievedPoints;
-                                                    
+                        if (p.Point <= 0) DuHarVundet(p.Name);
                     }
                     //Skæve:
                     if (userInput == "2")
                     {
                         p.Point = p.Point + recievedPoints;
 
-                        foreach (Player p2 in players)
+                        foreach (Player p2 in players.ToList()) //If you add ".ToList()" to your list (or the results of a LINQ query), you can remove "item" directly from "list" without the dreaded "Collection was modified; enumeration operation may not execute." error.
                         {
                             p2.Point = p2.Point - recievedPoints;
+                            if (p2.Point <= 0) DuHarVundet(p2.Name);
                         }
                     }
                     ShowPlayerList();
