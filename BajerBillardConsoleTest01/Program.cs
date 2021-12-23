@@ -10,13 +10,18 @@ namespace BajerBillardConsoleTest01
     {
         static void Main(string[] args)
         {
-            Player player = new Player();
-           
-            player.AddPlayers();
+            
+            Game game = new Game();
 
-            player.ShowPlayerList();
+            //game.AddPlayers(Console.ReadLine());
 
-            player.GodeEllerSkaeve();
+            game.AddPlayers("Jimmy");
+            game.AddPlayers("Martin");
+            game.AddPlayers("Poul");
+
+            game.ShowPlayerList();
+
+            game.GodeEllerSkaeve();
 
             Console.ReadKey();
         }
