@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BajerBillardConsole
+﻿namespace BajerBillardConsole
 {
     public class Player
     {
@@ -13,12 +7,12 @@ namespace BajerBillardConsole
 
         public int? Index { get; set; }
 
-        public Player (string name)
+        public Player(string name)
         {
             Name = name;
 
         }
-        
+
 
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BajerBillardConsoleTest01
 {
@@ -20,18 +18,16 @@ namespace BajerBillardConsoleTest01
 
         public void AddPlayers(string name)
         {
-         
-                players.Add(new Player(name));
-                //Console.WriteLine("Tilføj flere spillere? skriv '1' for ja, '2' for nej.");
-                //string userInput = Console.ReadLine();
-                //if (userInput == "1")
-                //{
-                //    Console.Write($"skriv næste spiller: ");
-                //    AddPlayers(Console.ReadLine());
-                //}
 
+            players.Add(new Player(name));
+            //Console.WriteLine("Tilføj flere spillere? skriv '1' for ja, '2' for nej.");
+            //string userInput = Console.ReadLine();
+            //if (userInput == "1")
+            //{
+            //    Console.Write($"skriv næste spiller: ");
+            //    AddPlayers(Console.ReadLine());
+            //}
         }
- 
         public void ShowPlayerList()
         {
             Console.WriteLine("Status:");
@@ -41,7 +37,14 @@ namespace BajerBillardConsoleTest01
             }
 
         }
+        void Winner(string name)
+        {
+            Console.WriteLine($"{name} du har vundet! De andre spiller videre uden dig.");
 
+            var player = players.FirstOrDefault(x => x.Name == name);
+
+            players.Remove(player);
+        }
         public void GodeEllerSkaeve()
         {
             //Player p;
@@ -50,15 +53,6 @@ namespace BajerBillardConsoleTest01
             {
                 foreach (Player p in players.ToList()) //If you add ".ToList()" to your list (or the results of a LINQ query), you can remove "item" directly from "list" without the dreaded "Collection was modified; enumeration operation may not execute." error.
                 {
-                 
-                    void DuHarVundet(string name)
-                    {
-                        Console.WriteLine($"{p.Name} du har vundet! De andre spiller videre uden dig.");
-
-                        var player = players.FirstOrDefault(x => x.Name == p.Name);
-
-                        players.Remove(player);
-                    }
 
                     Console.WriteLine($"{p.Name}, det er din tur.");
                     Console.WriteLine("skriv '1' for Gode eller '2' for Skæve");
@@ -69,7 +63,7 @@ namespace BajerBillardConsoleTest01
                     if (userInput == "1")
                     {
                         p.Point = p.Point - recievedPoints;
-                        if (p.Point <= 0) DuHarVundet(p.Name);
+                        if (p.Point <= 0) Winner(p.Name);
                     }
                     //Skæve:
                     if (userInput == "2")
@@ -79,7 +73,7 @@ namespace BajerBillardConsoleTest01
                         foreach (Player p2 in players.ToList()) //If you add ".ToList()" to your list (or the results of a LINQ query), you can remove "item" directly from "list" without the dreaded "Collection was modified; enumeration operation may not execute." error.
                         {
                             p2.Point = p2.Point - recievedPoints;
-                            if (p2.Point <= 0) DuHarVundet(p2.Name);
+                            if (p2.Point <= 0) Winner(p2.Name);
                         }
                     }
                     ShowPlayerList();

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BajerBillardConsoleTest01
+﻿namespace BajerBillardConsoleTest01
 {
     internal class Player
     {
@@ -12,7 +6,7 @@ namespace BajerBillardConsoleTest01
         public int Point { get; set; }
 
         //automatic ID number
-        private static int m_Counter = 0; 
+        private static int m_Counter = 0;
         public int Id { get; set; }
 
 
