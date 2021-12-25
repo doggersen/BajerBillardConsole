@@ -7,11 +7,13 @@ namespace BajerBillardConsoleTest01
     internal class Game
     {
 
-        List<Player> players = new List<Player>();
+        List<Player> listPlayers = new List<Player>();
 
-        List<Player> gameOverPlayers = new List<Player>();
+        List<Player> listPlayersGameOver = new List<Player>();
 
-        Player player = new Player();
+        List<Player> listPlayersHistory = new List<Player>();
+
+        //Player player = new Player();
 
         public Game()
         {
@@ -21,7 +23,7 @@ namespace BajerBillardConsoleTest01
         public void AddPlayers(string name)
         {
 
-            players.Add(new Player(name));
+            listPlayers.Add(new Player(name));
             //Console.WriteLine("Tilføj flere spillere? skriv '1' for ja, '2' for nej.");
             //string userInput = Console.ReadLine();
             //if (userInput == "1")
@@ -33,7 +35,7 @@ namespace BajerBillardConsoleTest01
         public void ShowPlayerList()
         {
             Console.WriteLine("Status:");
-            foreach (Player p in players)
+            foreach (Player p in listPlayers)
             {
                 Console.WriteLine($"Navn: {p.Name}, Score: {p.Point} point, ID: {p.Id}");
             }
@@ -43,34 +45,34 @@ namespace BajerBillardConsoleTest01
         {
             Console.WriteLine($"{name} du har vundet! De andre spiller videre uden dig.");
 
-            var player = players.FirstOrDefault(x => x.Name == name);
+            var player = listPlayers.FirstOrDefault(x => x.Name == name);
 
-            players.Remove(player);
+            listPlayersGameOver.Add(player); //add to the gameover list before being removed!
+                    
+            listPlayers.Remove(player);
         }
         //når der kun er en spiller tilbage
         void GameOver()
         {
             Console.WriteLine("Samlet status: ");
-            foreach (Player p in gameOverPlayers)
+            foreach (Player p in listPlayersGameOver)
             {
-                Console.WriteLine($"Plads, Navn: {p.Name}, Score: {p.Point} point, ID: ");
+                //Console.WriteLine($" ... .Pladsen, Navn: {p.Name} Skæve i alt: {p.SkaeveAccumulated} point, ID: ");
+                Console.WriteLine($" ... .Pladsen, Navn: Skæve i alt: {p.SkaeveAccumulated} point, ID: ");
+                Console.WriteLine("test");
             }
+            Console.ReadKey();
         }
 
         public void GodeEllerSkaeve()
         {
             //Player p;
 
-           // while (players.Count > 1)
-             
-                foreach (Player p in players.ToList()) //If you add ".ToList()" to your list (or the results of a LINQ query), you can remove "item" directly from "list" without the dreaded "Collection was modified; enumeration operation may not execute." error.
+           while (listPlayers.Count > 1)
+            { 
+                foreach (Player p in listPlayers.ToList()) //If you add ".ToList()" to your list (or the results of a LINQ query), you can remove "item" directly from "list" without the dreaded "Collection was modified; enumeration operation may not execute." error.
                 {
-                    if (players.Count == 1) //en spiller tilbage, spillet slutter. 
-                    {
-                        Console.WriteLine($"{p.Name} du tabte!");
-                        GameOver();
-                    }
-
+               
                     Console.WriteLine($"{p.Name}, det er din tur.");
                     Console.Write("skriv '1' for Gode eller '2' for Skæve: ... ");
                     string userInput = Console.ReadLine();
@@ -88,18 +90,31 @@ namespace BajerBillardConsoleTest01
                         p.Point = p.Point + recievedPoints;
                         p.SkaeveAccumulated += recievedPoints;
 
-                        foreach (Player p2 in players.ToList()) //If you add ".ToList()" to your list (or the results of a LINQ query), you can remove "item" directly from "list" without the dreaded "Collection was modified; enumeration operation may not execute." error.
+                        foreach (Player p2 in listPlayers.ToList()) //If you add ".ToList()" to your list (or the results of a LINQ query), you can remove "item" directly from "list" without the dreaded "Collection was modified; enumeration operation may not execute." error.
                         {
                             p2.Point = p2.Point - recievedPoints;
                             if (p2.Point <= 0) Winner(p2.Name);
                         }
                     }
                     ShowPlayerList();
-                  
+
+
+                    if (listPlayers.Count == 1) //en spiller tilbage, spillet slutter. 
+                    {
+                        Console.WriteLine($"{p.Name} du tabte!");
+
+                        //sidste spiller tilføjes game over listen!
+                        var player = listPlayers.FirstOrDefault(x => x.Name == p.Name);
+                        listPlayersGameOver.Add(player);
+
+                        GameOver();
+                    }
+                    //GodeEllerSkaeve();
+
 
                 }
+             }
 
-            
         }
     }
 }
