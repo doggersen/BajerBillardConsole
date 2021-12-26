@@ -54,7 +54,10 @@ namespace BajerBillardConsoleTest01
             {
                 Console.WriteLine($"{p.Plads}.pladsen: {p.Name} Skæve i alt: {p.SkaeveAccumulated}");
             }
+            Console.WriteLine("Hvis der skulle startes et nyt spil, ville rækkefølgen være således: ");
+            //List<Player> SortedList = objListOrder.OrderByDescending(o=>o.Plads).ToList();
             Console.ReadKey();
+            
         }
         public void GodeEllerSkaeve()
         {

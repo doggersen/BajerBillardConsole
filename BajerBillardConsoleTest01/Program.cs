@@ -6,11 +6,10 @@ namespace BajerBillardConsoleTest01
     {
         static void Main(string[] args)
         {
-
             Game game = new Game();
 
             //game.AddPlayers(Console.ReadLine());
-
+            
             game.AddPlayers("Jimmy");
             game.AddPlayers("Martin");
             game.AddPlayers("Poul");
