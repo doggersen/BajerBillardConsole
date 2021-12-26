@@ -57,9 +57,9 @@ namespace BajerBillardConsoleTest01
             Console.WriteLine("Samlet status: ");
             foreach (Player p in listPlayersGameOver)
             {
-                //Console.WriteLine($" ... .Pladsen, Navn: {p.Name} Skæve i alt: {p.SkaeveAccumulated} point, ID: ");
-                Console.WriteLine($" ... .Pladsen, Navn: Skæve i alt: {p.SkaeveAccumulated} point, ID: ");
-                Console.WriteLine("test");
+                Console.WriteLine($" ... .Pladsen, Navn: {p.Name} Skæve i alt: {p.SkaeveAccumulated} point, ID: ");
+                //Console.WriteLine($" ... .Pladsen, Navn: Skæve i alt: {p.SkaeveAccumulated} point, ID: ");
+                //Console.WriteLine("test");
             }
             Console.ReadKey();
         }
@@ -68,10 +68,20 @@ namespace BajerBillardConsoleTest01
         {
             //Player p;
 
-           while (listPlayers.Count > 1)
+           while (listPlayers.Count > 0)
             { 
                 foreach (Player p in listPlayers.ToList()) //If you add ".ToList()" to your list (or the results of a LINQ query), you can remove "item" directly from "list" without the dreaded "Collection was modified; enumeration operation may not execute." error.
                 {
+                                        if (listPlayers.Count == 1) //en spiller tilbage, spillet slutter. 
+                    {
+                        Console.WriteLine($"{p.Name} du tabte!");
+
+                        //sidste spiller tilføjes game over listen!
+                        var player = listPlayers.FirstOrDefault(x => x.Name == p.Name);
+                        listPlayersGameOver.Add(player);
+
+                        GameOver();
+                    }
                
                     Console.WriteLine($"{p.Name}, det er din tur.");
                     Console.Write("skriv '1' for Gode eller '2' for Skæve: ... ");
@@ -99,16 +109,7 @@ namespace BajerBillardConsoleTest01
                     ShowPlayerList();
 
 
-                    if (listPlayers.Count == 1) //en spiller tilbage, spillet slutter. 
-                    {
-                        Console.WriteLine($"{p.Name} du tabte!");
 
-                        //sidste spiller tilføjes game over listen!
-                        var player = listPlayers.FirstOrDefault(x => x.Name == p.Name);
-                        listPlayersGameOver.Add(player);
-
-                        GameOver();
-                    }
                     //GodeEllerSkaeve();
 
 
