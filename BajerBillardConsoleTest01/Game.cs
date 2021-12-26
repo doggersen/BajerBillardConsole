@@ -9,7 +9,7 @@ namespace BajerBillardConsoleTest01
         List<Player> listPlayers = new List<Player>();
         List<Player> listPlayersGameOver = new List<Player>();
         List<Player> listPlayersHistory = new List<Player>();
-        //Player player = new Player();
+
         public Game()
         {
             Console.Write("skriv navn på første spiller: ");
@@ -27,18 +27,24 @@ namespace BajerBillardConsoleTest01
         }
         public void ShowPlayerList()
         {
-            Console.WriteLine("Status:");
+            Console.WriteLine($"Status: ");
             foreach (Player p in listPlayers)
             {
-                Console.WriteLine($"Navn: {p.Name}, Score: {p.Point} point, ID: {p.Id}");
+                Console.WriteLine($"Navn: {p.Name}, Score: {p.Point} point");
             }
         }
         void Winner(string name)
         {
-            Console.WriteLine($"{name} du har vundet! De andre spiller videre uden dig.");
+            Console.WriteLine($"{name}, du kom på {PladsCounter}.pladsen!");
             var player = listPlayers.FirstOrDefault(x => x.Name == name);
-            listPlayersGameOver.Add(player); //add to the gameover list before being removed!
+            player.Plads = PladsCounter;
+            PladsCounter++;
+            listPlayersGameOver.Add(player); //add player to gameover list before being removed!
             listPlayers.Remove(player);
+            if (listPlayers.Count == 0)
+            {
+                GameOver();
+            }
         }
         //når der kun er en spiller tilbage
         void GameOver()
@@ -46,24 +52,19 @@ namespace BajerBillardConsoleTest01
             Console.WriteLine("Samlet status: ");
             foreach (Player p in listPlayersGameOver)
             {
-                Console.WriteLine($" ... .Pladsen, Navn: {p.Name} Skæve i alt: {p.SkaeveAccumulated} point, ID: ");
+                Console.WriteLine($"{p.Plads}.pladsen: {p.Name} Skæve i alt: {p.SkaeveAccumulated}");
             }
             Console.ReadKey();
         }
         public void GodeEllerSkaeve()
         {
-            //Player p;
            while (listPlayers.Count > 0) //seems to be of no importance, since the below if-statement ends the loop anyway, by calling the GameOver() method
             { 
                 foreach (Player p in listPlayers.ToList()) //If you add ".ToList()" to your list (or the results of a LINQ query), you can remove "item" directly from "list" without the dreaded "Collection was modified; enumeration operation may not execute." error.
                 {
-                                        if (listPlayers.Count == 1) //en spiller tilbage, spillet slutter. 
+                    if (listPlayers.Count == 1) //en spiller tilbage, spillet slutter. 
                     {
-                        Console.WriteLine($"{p.Name} du tabte!");
-                        //sidste spiller tilføjes game over listen!
-                        var player = listPlayers.FirstOrDefault(x => x.Name == p.Name);
-                        listPlayersGameOver.Add(player);
-                        GameOver();
+                        Winner(p.Name);
                     }
                     Console.WriteLine($"{p.Name}, det er din tur.");
                     Console.Write("skriv '1' for Gode eller '2' for Skæve: ... ");
@@ -88,7 +89,6 @@ namespace BajerBillardConsoleTest01
                         }
                     }
                     ShowPlayerList();
-                    //GodeEllerSkaeve();
                 }
              }
         }
