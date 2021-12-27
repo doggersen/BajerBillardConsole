@@ -54,8 +54,13 @@ namespace BajerBillardConsoleTest01
             {
                 Console.WriteLine($"{p.Plads}.pladsen: {p.Name} Skæve i alt: {p.SkaeveAccumulated}");
             }
+            
             Console.WriteLine("Hvis der skulle startes et nyt spil, ville rækkefølgen være således: ");
-            //List<Player> SortedList = objListOrder.OrderByDescending(o=>o.Plads).ToList();
+            listPlayersGameOver.Sort((x, y) => y.Plads.CompareTo(x.Plads)); //hvis der byttes rundt på x og y til højre i ligningen, sorteres der "ascending" i stedet for "descending". 
+            foreach (Player p in listPlayersGameOver)
+            {
+                Console.WriteLine($"{p.Name}");
+            }
             Console.ReadKey();
             
         }

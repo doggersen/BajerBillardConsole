@@ -12,7 +12,7 @@
         private static int m_Counter = 0;
         public int Id { get; set; }
 
-
+        
         public Player(string name = "Anonymous")
         {
             Name = name;
