@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BajerBillardConsoleTest01", "BajerBillardConsoleTest01\BajerBillardConsoleTest01.csproj", "{2F68EBFC-1B88-4B11-B771-BC903486318A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectTesting", "ObjectTesting\ObjectTesting.csproj", "{92775C46-3002-4B50-B981-6B8CFF391FAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2F68EBFC-1B88-4B11-B771-BC903486318A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F68EBFC-1B88-4B11-B771-BC903486318A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F68EBFC-1B88-4B11-B771-BC903486318A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92775C46-3002-4B50-B981-6B8CFF391FAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92775C46-3002-4B50-B981-6B8CFF391FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92775C46-3002-4B50-B981-6B8CFF391FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92775C46-3002-4B50-B981-6B8CFF391FAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
