@@ -12,10 +12,11 @@ namespace ObjectTesting
         {
             Game game = new Game();
 
-            game.ShowList();
-            game.ShowListAGain();
             game.PopulateList();
 
+            game.ShowList();
+            game.ShowListAGain();
+            
 
             Player player = new Player();
 

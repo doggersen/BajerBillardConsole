@@ -8,7 +8,7 @@ namespace ObjectTesting
 {
     internal class Game
     {
-        List<Player> players = new List<Player>();
+        static List<Player> players = new List<Player>();
         public List<Player> GetList()
         {
             return players; 
